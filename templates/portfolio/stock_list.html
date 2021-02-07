@@ -50,9 +50,9 @@
                     <td>{{ stock.shares }}</td>
                     <td>{{ stock.purchase_price }}</td>
                     <td>{{ stock.purchase_date }}</td>
-                     <td><a href="{% url 'portfolio:stock_edit' pk=customer.pk %}" class="btn btn-warning">Edit</a>
+                     <td><a href="{% url 'portfolio:stock_edit' pk=stock.pk %}" class="btn btn-warning">Edit</a>
 
-                    <<td><a href="{% url 'portfolio:stock_delete' pk=customer.pk %}"
+                    <td><a href="{% url 'portfolio:stock_delete' pk=stock.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>

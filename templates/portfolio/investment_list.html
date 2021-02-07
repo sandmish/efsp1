@@ -53,9 +53,9 @@
                     <td>{{ investment.recent_value }}</td>
                      <td>{{ investment.recent_date }}</td>
 
-                     <td><a href="{% url 'portfolio:investment_edit' pk=customer.pk %}" class="btn btn-warning">Edit</a>
+                     <td><a href="{% url 'portfolio:investment_edit' pk=investment.pk %}" class="btn btn-warning">Edit</a>
 
-                    <<td><a href="{% url 'portfolio:investment_delete' pk=customer.pk %}"
+                    <td><a href="{% url 'portfolio:investment_delete' pk=investment.pk %}"
                            onclick="return confirm('Are you sure you want to delete?')"
                            class="btn btn-danger">Delete</a>
                     </td>
