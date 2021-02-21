@@ -1,0 +1,28 @@
+{% extends "portfolio/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block title %}Create an Account{% endblock %}
+
+{% block content %}
+<div class =  "row justify-content-center">
+    <div class="col-md-6"></div>
+        <div class = "col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Create an account</h1>
+                    <p>Please, sign up using the following form:</p>
+                    <form method="POST" class="form-group">
+                        {% csrf_token %}
+	                    {{ form|crispy }}
+                        <br/>
+                        <p><button type="submit" class="btn btn-success">Sign In</button></p>
+                    </form>
+	                <div class="border-top pt-3">
+                        <p>Already have an Account?<a class="ml-2"  href="{% url 'login' %}"> Log In </a></p>
+	                </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-md-6"></div>
+</div>
+{% endblock %}

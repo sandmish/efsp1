@@ -1,0 +1,12 @@
+
+.myNavbar{
+    background-color: #a6e1ec;
+    font-size: medium;
+}
+h1 {
+    color: #FCA205;
+    font-family: 'Arial', serif;
+}
+body{
+    background-image: url("../../static/images/img.png");
+}

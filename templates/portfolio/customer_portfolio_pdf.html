@@ -1,0 +1,175 @@
+{% load mathfilters %}
+{% load humanize %}
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+    </head>
+    <body>
+{% block content %}
+    <div class="row justify-content-md-center">
+        <h2><b>CUSTOMER PORTFOLIO</b></h2>
+    </div>
+    <div class="row">
+        <h2><u><b>Overall Portfolio Performance</b></u></h2>
+    </div>
+    <div class="row justify-content-md-center">
+        <table class="table table-hover table-striped table-bordered text-center">
+            <thead>
+            <tr class="bg-info">
+                <th>Portfolio Initial Investments</th>
+                <th>Portfolio Current Investments</th>
+                <th>Grant Total Results</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ sum_of_initial_stock_value|addition:sum_acquired_value|floatformat:2|intcomma }}</td>
+                <td>{{ sum_current_stocks_value|addition:sum_recent_value|floatformat:2|intcomma }}</td>
+                <td>{{ overall_investment_results|addition:overall_stocks_results|floatformat:2|intcomma }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row ">
+        <h2><u><b>Stocks Information</b></u></h2>
+    </div>
+    <div class="row justify-content-md-center">
+        <table class="table table-hover table-striped table-bordered text-center">
+            <thead>
+            <tr class="bg-warning">
+                <th>Customer</th>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Initial Stock Price</th>
+                <th>Initial Stock Value</th>
+                <th>Current Stock Price</th>
+                <th>Current Stock Value</th>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.customer }}</td>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.shares }}</td>
+                <td>{{ stock.purchase_price|floatformat:2|intcomma }}</td>
+                <td>{{ stock.initial_stock_value|floatformat:2|intcomma}}</td>
+                <td>{{ stock.current_stock_price|floatformat:2|intcomma}}</td>
+                <td>{{ stock.current_stock_value|floatformat:2|intcomma}}</td>
+                <td>{{ stock.current_stock_value|sub:stock.initial_stock_value|floatformat:2|intcomma}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <table class="table table-hover table-striped table-bordered text-center">
+            <thead>
+            <tr class="bg-warning">
+                <th>Total of Initial Stocks</th>
+                <th>Total of Current Stocks</th>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ sum_of_initial_stock_value|floatformat:2|intcomma }}</td>
+                <td>{{ sum_current_stocks_value|floatformat:2|intcomma }}</td>
+                <td>{{ overall_stocks_results|floatformat:2|intcomma }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+     <div class="row">
+         <h2 class="navbar-brand" style="padding-left: 15Px"><u><b>Investment Information</b></u></h2>
+    </div>
+    <div class="row justify-content-md-center">
+        <table class="table table-hover table-striped table-bordered text-center">
+            <thead>
+            <tr class="bg-info">
+                <th>Customer</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Acquired Value</th>
+                <th>Acquired Date</th>
+                <th>Recent Value</th>
+                <th>Recent Date</th>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for invest in investments %}
+                <tr>
+                    <td>{{ invest.customer }}</td>
+                    <td>{{ invest.category }}</td>
+                    <td>{{ invest.description }}</td>
+                    <td>{{ invest.acquired_value }}</td>
+                    <td>{{ invest.acquired_date }}</td>
+                    <td>{{ invest.recent_value}} </td>
+                    <td>{{ invest.recent_date}} </td>
+                    <td>{{ invest.recent_value|sub:invest.acquired_value|floatformat:2|intcomma}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <table class="table table-hover table-striped table-bordered text-center">
+            <thead>
+            <tr class="bg-info">
+                <th>Total of Initial Investments</th>
+                <th>Total of Current Investments</th>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ sum_acquired_value|floatformat:2|intcomma }}</td>
+                    <td>{{ sum_recent_value|floatformat:2|intcomma }}</td>
+                    <td>{{ overall_investment_results|floatformat:2|intcomma }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+    </body>

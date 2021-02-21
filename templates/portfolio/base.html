@@ -1,18 +1,25 @@
 {% load static %}
-
 <html lang="en">
 <head>
+
     <title>Eagle Financial Services</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+ <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
+            background:#f2dede;
             margin-bottom: 0;
             border-radius: 0;
+            font-family: "Arial Black", sans-serif;
+
         }
 
         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -23,15 +30,12 @@
         /* Set gray background color and 100% height */
         .sidenav {
             padding-top: 20px;
-            background-color: #f1f1f1;
             height: 100%;
         }
 
         /* Set black background color, white text and some padding */
         footer {
-            background-color: #555;
-            color: white;
-            padding: 15px;
+               padding: 15px;
         }
 
         /* On small screens, set height to 'auto' for sidenav and grid */
@@ -46,8 +50,8 @@
             }
         }
     </style>
-</head>
-<body id="app-layout">
+  </head>
+<body id="app-layout" style="background-color:azure">
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -68,25 +72,29 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'portfolio:home' %}">Home</a></li>
-                <li><a href="{% url 'portfolio:customer_list' %}">Customers</a></li>
-               <li><a href="{% url 'portfolio:investment_list' %}">Investments</a></li>
-                <li><a href="{% url 'portfolio:stock_list' %}">Stocks</a></li>
-
-            </ul>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3"  href="{% url 'portfolio:home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'portfolio:customer_list' %}">Customers</a></li>
+               <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'portfolio:investment_list' %}">Investments</a></li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'portfolio:stock_list' %}">Stocks</a></li>
+                <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'portfolio:contact' %}">Send Report</a></li>
+                            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <span class="caret"></span>
-                        </a>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"style="font-family: 'Arial Black'" >{{ user.username|title }}</a>
+                                       </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'logout' %}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'portfolio:password_change_form' %}"> Change Password</a></li>
+
+
                         </ul>
+
                     </li>
                 {% else %}
-                    <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                {% endif %}
+                    <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <<li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'portfolio:register' %}"> Sign Up</a></li>
+                               {% endif %}
             </ul>
         </div>
     </div>
@@ -100,13 +108,10 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="thumbnail">
-                                <img src="{% static "images/customer.jpg" %}"  width="200px" height=200px" alt="customer"/>
-                                <div class="caption">
-                                    <h2>Customer</h2>
-                                    <p>We see our success in our customers success, it gives us an immense pleasure when
-                                        our
-                                        advises
-                                        turn out to be fruitful. </p>
+                                <img src="{% static "images/customer.jpg" %}" alt="customer"/>
+                                <div class="caption"><br>
+                                    <h3>Customer</h3>
+                                    <p>We see our success in our customers success, it gives us an immense pleasure when our advises turn out to be fruitful. </p>
                                     {% if user.is_authenticated %}
                                         <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}"
                                               role="button">View
@@ -119,8 +124,9 @@
                             <div class="thumbnail">
                                 <img src="{% static "images/nonstock.jpg" %}" alt="non-stock"/>
                                 <div class="caption">
-                                    <h2>Non-Stock Investments</h2>
-                                    <p>Our team also provides advice for Non-Stock investments.</p>
+                                    <h3>Non-Stock Investments</h3>
+                                    <p>Our team also provides advises for Non-Stock investments.
+                                                                            </p>
                                     <p><a class="btn btn-default" href="{% url 'portfolio:investment_list' %}"
                                            role="button">View
                                         details &raquo;</a></p>
@@ -131,7 +137,7 @@
                             <div class="thumbnail">
                                 <img src="{% static "images/stocks.jpg" %}" alt="stocks"/>
                                 <div class="caption">
-                                    <h2>Stock Portfolio</h2>
+                                    <h3>Stock Portfolio</h3>
                                     <p>Our Stock portfolios vary across industries.</p>
                                     <p><a class="btn btn-default" href="{% url 'portfolio:stock_list' %}" role="button">View
                                         details &raquo;</a></p>
@@ -146,5 +152,3 @@
     </div>
 </body>
 </html>
-
-

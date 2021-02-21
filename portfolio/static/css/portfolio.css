@@ -1,9 +1,15 @@
 
-body {
-    padding-left: 15px;
+h3 a {
+    color: white;
+    font-family: 'Arial Black', serif;
 }
 
-h1 a {
-    color: #FCA205;
-    font-family: 'cursive';
+body{
+    align-content: center;
+    background-image: url('../images/img.png');
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Arial;
+    font-size: medium;
 }
+
